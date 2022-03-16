@@ -20,23 +20,27 @@ $databaseManager->connect();
 // Update the naming if you'd like to work with another collection
 $cardRepository = new CardRepository($databaseManager);
 $cards = $cardRepository->get();
+// var_dump($cards);
 
 // Get the current action to execute
 // If nothing is specified, it will remain empty (home should be loaded)
-$action = $_GET['action'] ?? null;
+$action = !empty($_GET['action'] ?? null);
+
 
 // Load the relevant action
 // This system will help you to only execute the code you want, instead of all of it (or complex if statements)
 switch ($action) {
-    case 'create':
-        $this->create();
+    case 'Create':
+        $values = "'{$_GET['name']}', '{$_GET['year']}', '{$_GET['console']}'";
+        // var_dump($values);
+        $cardRepository->create($values);
         break;
     default:
-        $this->overview();
+        overview($cards);
         break;
 }
 
-function overview()
+function overview($cards)
 {
     // Load your view
     // Tip: you can load this dynamically and based on a variable, if you want to load another view

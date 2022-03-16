@@ -13,9 +13,11 @@ class CardRepository
         $this->databaseManager = $databaseManager;
     }
 
-    public function create(): void
+    public function create($values): void
     {
-
+        $query = "INSERT INTO mario_games (`name`, `year`, console) VALUES ($values)";
+        $this->databaseManager->connection->query($query);
+        return;
     }
 
     // Get one
@@ -25,13 +27,16 @@ class CardRepository
     }
 
     // Get all
-    public function get(): array
+    public function get(): PDOStatement
     {
         // TODO: replace dummy data by real one
-        return [
-            ['name' => 'dummy one'],
-            ['name' => 'dummy two'],
-        ];
+        $query = "SELECT * FROM mario_games";
+        $result = $this->databaseManager->connection->query($query);
+        return $result;
+        // return [
+        //     ['name' => 'dummy one'],
+        //     ['name' => 'dummy two'],
+        // ];
 
         // We get the database connection first, so we can apply our queries with it
         // return $this->databaseManager->connection-> (runYourQueryHere)

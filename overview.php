@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Goodcard - track your collection of Pokémon cards</title>
 </head>
@@ -14,8 +14,22 @@
 <ul>
     <?php foreach ($cards as $card) : ?>
         <li><?= $card['name'] ?></li>
+        <li><?= $card['year'] ?></li>
+        <li><?= $card['console'] ?></li>
+        <a href="?action=modify">Modify</a>
+        <a href="?action=delete">Delete</a>
     <?php endforeach; ?>
 </ul>
+
+<form method="GET">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name">
+        <label for="year">Year</label>
+        <input type="text" id="year" name="year">
+        <label for="console">Console</label>
+        <input type="text" id="console" name="console">
+        <input type="submit" name="action" value="Create">
+</form>
 
 </body>
 </html>
