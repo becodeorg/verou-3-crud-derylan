@@ -21,15 +21,7 @@
     <?php endforeach; ?>
 </ul>
 
-<form method="GET">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name">
-        <label for="year">Year</label>
-        <input type="text" id="year" name="year">
-        <label for="console">Console</label>
-        <input type="text" id="console" name="console">
-        <input type="submit" name="action" value="Create">
-</form>
+<button><a href="create.php">Add new data</a></button>
 
 </body>
 </html>
