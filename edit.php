@@ -16,7 +16,7 @@
         <input type="text" id="year" name="newYear">
         <label for="console">Console</label>
         <input type="text" id="console" name="newConsole">
-        <input type="submit" name="action" value="Edit">
+        <input type="submit" name="action" value="modify">
     </form>
 </body>
 

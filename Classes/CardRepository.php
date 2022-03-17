@@ -35,11 +35,11 @@ class CardRepository
         return $result;
     }
 
-    public function update($newValues): void
+    public function update(): void
     {
-        $new = "UPDATE mario_games SET `name` = '{$_GET['newName']}, `year` = '{$_GET['newYear']}, `console` = '{$_GET['newConsole']} VALUES ($newValues) WHERE id = '{$_GET['id']}'";
+        $new = "UPDATE mario_games SET `name` = '{$_GET['newName']}', `year` = {$_GET['newYear']}, `console` = '{$_GET['newConsole']}' WHERE id = {$_SESSION['id']}";
         $this->databaseManager->connection->query($new);
-        return;
+        header('Location:index.php');
     }
 
     public function delete(): void

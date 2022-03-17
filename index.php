@@ -8,6 +8,12 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+//Create session to keep the id for the update function
+session_start();
+if(!empty ($_GET['id'])) {
+    $_SESSION['id'] = $_GET['id'];
+}
+
 // Load you classes
 require_once 'config.php';
 require_once 'classes/DatabaseManager.php';
@@ -35,7 +41,6 @@ switch ($action) {
     case 'modify':
         echo 'HELL';
         update($cardRepository, $databaseManager);
-        require 'edit.php';
     default:
         overview($cards);
         break;
@@ -58,13 +63,12 @@ function create($cardRepository)
 
 function update($cardRepository, $databaseManager)
 {
-    $query = "SELECT * FROM mario_games WHERE id ='{$_GET['id']}'";
+    $query = "SELECT * FROM mario_games WHERE id ='{$_SESSION['id']}'";
     $result = $databaseManager->connection->query($query);
     $fetch = $result->fetch(PDO::FETCH_ASSOC);
-    var_dump($fetch);
-    // if (!empty($_GET['name'] & $_GET['year'] & $_GET['console'])){
-    $newValues = "'{$_GET['newName']}', '{$_GET['newYear']}', '{$_GET['newConsole']}'";
-    if (!empty($_GET['year'])){
-    $cardRepository->update($newValues);
+    require 'edit.php';
+
+    if (!empty($_GET['newName']) && !empty($_GET['newYear']) && !empty($_GET['newConsole'])){
+    $cardRepository->update();
     }
 }
