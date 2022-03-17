@@ -45,8 +45,9 @@ class CardRepository
 
     public function delete(): void
     {
-        $delete = "DELETE FROM mario_games WHERE id = {$_SESSION['id']}";
+        $delete = "DELETE FROM mario_games WHERE id = '{$_SESSION['id']}'";
         $deleteData = $this->databaseManager->connection->prepare($delete);
+        // $deleteData->bindParam(("{$_SESSION['id']}", $id))
         $deleteData->execute();
         header('Location:index.php');
     }

@@ -22,7 +22,7 @@
         <td><?= $card['year'] ?></td>
         <td><?= $card['console'] ?></td>
         <td><a href="<?= "?id={$card['id']}&action=modify"?>">Modify</a></td>
-        <td><a href="index.php?action=delete&id=<?=$card['id']?>">Delete</a></td>
+        <td><a href="?action=delete&id=<?=$card['id']?>">Delete</a></td>
         </tr>
     <?php endforeach; ?>
 </table>
