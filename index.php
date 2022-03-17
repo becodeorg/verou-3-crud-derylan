@@ -23,15 +23,19 @@ $cards = $cardRepository->get();
 
 // Get the current action to execute
 // If nothing is specified, it will remain empty (home should be loaded)
-$action = !empty($_GET['action'] ?? null);
+$action = $_GET['action'] ?? null;
 
 // Load the relevant action
 // This system will help you to only execute the code you want, instead of all of it (or complex if statements)
 switch ($action) {
     case 'Create':
-create($cardRepository);
+        create($cardRepository);
     require 'overview.php';
         break;
+    case 'modify':
+        echo 'HELL';
+        update($cardRepository, $databaseManager);
+        require 'edit.php';
     default:
         overview($cards);
         break;
@@ -46,6 +50,21 @@ function overview($cards)
 
 function create($cardRepository)
 {
+    if (!empty($_GET['name']) && !empty($_GET['year']) && !empty($_GET['console'])){
     $values = "'{$_GET['name']}', '{$_GET['year']}', '{$_GET['console']}'";
     $cardRepository->create($values);
+    }
+}
+
+function update($cardRepository, $databaseManager)
+{
+    $query = "SELECT * FROM mario_games WHERE id ='{$_GET['id']}'";
+    $result = $databaseManager->connection->query($query);
+    $fetch = $result->fetch(PDO::FETCH_ASSOC);
+    var_dump($fetch);
+    // if (!empty($_GET['name'] & $_GET['year'] & $_GET['console'])){
+    $newValues = "'{$_GET['newName']}', '{$_GET['newYear']}', '{$_GET['newConsole']}'";
+    if (!empty($_GET['year'])){
+    $cardRepository->update($newValues);
+    }
 }

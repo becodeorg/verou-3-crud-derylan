@@ -9,19 +9,26 @@
 </head>
 <body>
 
-<h1>Goodcard - track your collection of Pokémon cards</h1>
+<h1>Track your collection of Mario Games</h1>
 
-<ul>
+<table>
+    <th>Name</th>
+    <th>Year</th>
+    <th>Console</th>
+    <th>Edit</th>
     <?php foreach ($cards as $card) : ?>
-        <li><?= $card['name'] ?></li>
-        <li><?= $card['year'] ?></li>
-        <li><?= $card['console'] ?></li>
-        <a href="?action=modify">Modify</a>
-        <a href="?action=delete">Delete</a>
+        <tr>
+        <td><?= $card['name'] ?></td>
+        <td><?= $card['year'] ?></td>
+        <td><?= $card['console'] ?></td>
+        <td><a href="<?= "?id={$card['id']}&action=modify"?>">Modify</a></td>
+        <td><a href="index.php?action=delete&id=<?=$card['id']?>">Delete</a></td>
+        </tr>
     <?php endforeach; ?>
-</ul>
+</table>
 
-<button><a href="create.php">Add new data</a></button>
+<a href="create.php">Add new data</a>
 
+<?php var_dump($_GET)?>
 </body>
 </html>

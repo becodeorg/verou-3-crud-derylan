@@ -33,18 +33,13 @@ class CardRepository
         $query = "SELECT * FROM mario_games";
         $result = $this->databaseManager->connection->query($query);
         return $result;
-        // return [
-        //     ['name' => 'dummy one'],
-        //     ['name' => 'dummy two'],
-        // ];
-
-        // We get the database connection first, so we can apply our queries with it
-        // return $this->databaseManager->connection-> (runYourQueryHere)
     }
 
-    public function update(): void
+    public function update($newValues): void
     {
-
+        $new = "UPDATE mario_games SET `name` = '{$_GET['newName']}, `year` = '{$_GET['newYear']}, `console` = '{$_GET['newConsole']} VALUES ($newValues) WHERE id = '{$_GET['id']}'";
+        $this->databaseManager->connection->query($new);
+        return;
     }
 
     public function delete(): void
