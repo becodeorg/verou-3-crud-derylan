@@ -11,11 +11,11 @@
 <body>
     <form method="GET" action="index.php">
         <label for="name">Name</label>
-        <input type="text" id="name" name="newName">
+        <input type="text" id="name" name="newName" value="<?=$fetch['name']?>">
         <label for="year">Year</label>
-        <input type="text" id="year" name="newYear">
+        <input type="text" id="year" name="newYear" value="<?=$fetch['year']?>">
         <label for="console">Console</label>
-        <input type="text" id="console" name="newConsole">
+        <input type="text" id="console" name="newConsole" value="<?=$fetch['console']?>">
         <input type="submit" name="action" value="modify">
     </form>
 </body>

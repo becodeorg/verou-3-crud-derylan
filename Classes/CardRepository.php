@@ -23,7 +23,7 @@ class CardRepository
     // Get one
     public function find(): array
     {
-
+        
     }
 
     // Get all
@@ -38,13 +38,17 @@ class CardRepository
     public function update(): void
     {
         $new = "UPDATE mario_games SET `name` = '{$_GET['newName']}', `year` = {$_GET['newYear']}, `console` = '{$_GET['newConsole']}' WHERE id = {$_SESSION['id']}";
-        $this->databaseManager->connection->query($new);
+        $updateData = $this->databaseManager->connection->prepare($new); //prepare give a good protection against hacking 
+        $updateData->execute();
         header('Location:index.php');
     }
 
     public function delete(): void
     {
-
+        $delete = "DELETE FROM mario_games WHERE id = {$_SESSION['id']}";
+        $deleteData = $this->databaseManager->connection->prepare($delete);
+        $deleteData->execute();
+        header('Location:index.php');
     }
 
 }

@@ -34,13 +34,17 @@ $action = $_GET['action'] ?? null;
 // Load the relevant action
 // This system will help you to only execute the code you want, instead of all of it (or complex if statements)
 switch ($action) {
-    case 'Create':
+    case 'create':
         create($cardRepository);
     require 'overview.php';
         break;
     case 'modify':
-        echo 'HELL';
         update($cardRepository, $databaseManager);
+        break;
+    case 'delete';
+        delete($databaseManager, $cardRepository);
+        require 'delete.php';
+        break;
     default:
         overview($cards);
         break;
@@ -67,8 +71,20 @@ function update($cardRepository, $databaseManager)
     $result = $databaseManager->connection->query($query);
     $fetch = $result->fetch(PDO::FETCH_ASSOC);
     require 'edit.php';
+    var_dump($fetch);
 
     if (!empty($_GET['newName']) && !empty($_GET['newYear']) && !empty($_GET['newConsole'])){
     $cardRepository->update();
+    }
+}
+
+function delete($databaseManager, $cardRepository)
+{
+    $query = "SELECT * FROM mario_games WHERE id='{$_SESSION['id']}'";
+    $result = $databaseManager->connection->query($query);
+    $result->execute();
+
+    if(isset($_GET['delete'])){
+        $cardRepository->delete();
     }
 }
